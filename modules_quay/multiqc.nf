@@ -1,7 +1,7 @@
 process multiqc {
 
   container "quay.io/biocontainers/multiqc:1.27--pyhdfd78af_0"
-  publishDir "report/multiqc"
+  publishDir "report/multiqc", mode: 'copy'
   cpus 1
 
   input:

@@ -3,7 +3,8 @@ process process_radtags_pe {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "analysis/", pattern: "{catalog,populations,gstacks.log.distrib}.*", mode: 'copy'
+  publishDir "report/logs/", pattern: "*.log", mode: 'copy'
   cpus 1
 
   input:
