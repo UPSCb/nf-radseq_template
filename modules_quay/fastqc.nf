@@ -1,8 +1,8 @@
 process fastqc_pe {
 
   container "quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0"
-  publishDir "report/qc/${stage}", pattern: "*.{html,zip}", mode: 'copy'
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "${params.report_dir}/qc/${stage}", pattern: "*.{html,zip}", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*.log"
   executor params.executor
   cpus 2
 

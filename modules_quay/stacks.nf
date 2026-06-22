@@ -2,9 +2,9 @@ process process_radtags_pe {
 
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
-  publishDir "analysis/stacks"
-  publishDir "analysis/", pattern: "{catalog,populations,gstacks.log.distrib}.*", mode: 'copy'
-  publishDir "report/logs/", pattern: "*.log", mode: 'copy'
+  publishDir "${params.analysis_dir}/stacks"
+  publishDir "${params.analysis_dir}/", pattern: "{catalog,populations,gstacks.log.distrib}.*", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*.log", mode: 'copy'
   cpus 1
 
   input:
@@ -37,8 +37,8 @@ process ustacks {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus params.ustacks_cpus
-  publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "${params.analysis_dir}/stacks"
+  publishDir "${params.report_dir}/logs/", pattern: "*.log"
 
   input:
     tuple path(reads), val(name)
@@ -72,8 +72,8 @@ process cstacks {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus params.cstacks_cpus
-  publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "${params.analysis_dir}/stacks"
+  publishDir "${params.report_dir}/logs/", pattern: "*.log"
 
   input:
     path stacks
@@ -101,8 +101,8 @@ process sstacks {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus params.sstacks_cpus
-  publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "${params.analysis_dir}/stacks"
+  publishDir "${params.report_dir}/logs/", pattern: "*.log"
 
   input:
     path catalog
@@ -131,8 +131,8 @@ process tsv2bam {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus params.tsv2bam_cpus
-  publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "${params.analysis_dir}/stacks"
+  publishDir "${params.report_dir}/logs/", pattern: "*.log"
 
   input:
     path catalog
@@ -164,9 +164,9 @@ process gstacks {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus params.gstacks_cpus
-  publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
-  publishDir "report/logs/", pattern: "*.distribs"
+  publishDir "${params.analysis_dir}/stacks", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*.log", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*.distribs", mode: 'copy'
 
   input:
     path bam_files
@@ -194,10 +194,10 @@ process populations {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus params.populations_cpus
-  publishDir "analysis/stacks"
-  publishDir "report/logs/", pattern: "*.log"
-  publishDir "report/logs/", pattern: "*.distribs"
-  publishDir "report/logs/", pattern: "*sumstats_summary.tsv"
+  publishDir "${params.analysis_dir}/stacks", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*.log", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*.distribs", mode: 'copy'
+  publishDir "${params.report_dir}/logs/", pattern: "*sumstats_summary.tsv", mode: 'copy'
 
   input:
     path catalog

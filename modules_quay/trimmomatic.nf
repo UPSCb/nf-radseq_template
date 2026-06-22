@@ -1,8 +1,8 @@
 process trimmomatic_pe {
 
   container "quay.io/biocontainers/trimmomatic:0.39--1"
-  publishDir "analysis/trimmomatic", pattern: "*.fastq.gz"
-  publishDir "report/logs/", pattern: "*.log"
+  publishDir "${params.analysis_dir}/trimmomatic", pattern: "*.fastq.gz"
+  publishDir "${params.report_dir}/logs/", pattern: "*.log"
   cpus params.trimmomatic_cpus
 
   input:

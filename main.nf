@@ -33,7 +33,7 @@ process make_popfile {
   container "quay.io/biocontainers/stacks:2.68--h077b44d_1"
   executor params.executor
   cpus 1
-  publishDir "analysis/populations"
+  publishDir "${params.analysis_dir}/populations"
 
   input:
   val data
